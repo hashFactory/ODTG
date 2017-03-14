@@ -49,10 +49,6 @@ This is a little game we are making. Look away. We won't help with compilation.
     * Same as MainMenu, but with settings and exit/save
 3. SettingsMenu
     * Displays buttons with hooks to change xml of settings
-    
-#### Objects
-
-##### TODO
 
 #### AudioEngine
 
