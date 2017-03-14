@@ -7,8 +7,10 @@ import GraphicsEngine.Render;
  */
 public class Engine
 {
+    public Render render;
+
     public Engine()
     {
-        Render render = new Render();
+        render = new Render();
     }
 }
