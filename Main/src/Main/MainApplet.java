@@ -77,6 +77,14 @@ public class MainApplet extends JApplet implements Runnable, KeyListener
         Graphics g2 = image.getGraphics();
         g2.setColor(Color.pink);
         g2.drawString(Integer.toString(frameCount++), 300, 300);
+
+        //TODO: Replace later
+        g2.drawImage(engine.render.textureCreator.getTexture(0), 200, 400, this);
+        g2.drawImage(engine.render.textureCreator.getTexture(1), 300, 400, this);
+        g2.drawImage(engine.render.textureCreator.getTexture(2), 400, 400, this);
+        g2.drawImage(engine.render.textureCreator.getTexture(3), 500, 400, this);
+
+
         g.drawImage(image, 0, 0, this);
         tick.timeSinceLastFrame = 0;
     }
