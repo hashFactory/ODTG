@@ -1,8 +1,6 @@
 package Characters;
 
 import java.awt.*;
-import java.nio.ByteBuffer;
-import java.util.ArrayList;
 
 /**
  * Created by charpentiert on 3/14/17.
@@ -16,17 +14,10 @@ public class Protagonist
     float x = 0, y = 0;
     String username = "";
     byte[] special_items = new byte[8];
+    // 9x9 MAX INVENTORY SIZE
+    short[][] inventory = new short[9][10];
 
     public Protagonist()
     {
-
-    }
-
-    public ArrayList<Byte> toArrayList()
-    {
-        ArrayList<Byte> cache = new ArrayList<>();
-
-
-        return cache;
     }
 }

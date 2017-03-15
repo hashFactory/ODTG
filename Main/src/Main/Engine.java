@@ -1,5 +1,6 @@
 package Main;
 
+import Characters.Protagonist;
 import GraphicsEngine.Render;
 
 /**
@@ -8,9 +9,11 @@ import GraphicsEngine.Render;
 public class Engine
 {
     public Render render;
+    public Protagonist protagonist;
 
     public Engine()
     {
         render = new Render();
+        protagonist = new Protagonist();
     }
 }

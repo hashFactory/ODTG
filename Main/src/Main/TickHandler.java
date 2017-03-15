@@ -23,7 +23,7 @@ public class TickHandler implements Runnable
             execute();
             timeSinceLastTick = System.currentTimeMillis()-timeAtLastTick;
             try{
-                Thread.sleep(500-timeSinceLastTick);
+                Thread.sleep(2000-timeSinceLastTick);
             }
             catch (InterruptedException e)
             {
@@ -34,9 +34,10 @@ public class TickHandler implements Runnable
         }
     }
 
-    public void execute(){
+    public void execute()
+    {
         try {
-            Thread.sleep(5);
+            Thread.sleep(10);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

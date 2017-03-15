@@ -6,20 +6,21 @@ import Misc.PopulateSettings;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 
 public class MainApplet extends JApplet implements Runnable, KeyListener
 {
+    /*
     public static void main(String[] args)
     {
         MainApplet applet = new MainApplet();
-        applet.setPreferredSize(new Dimension(1000, 700));
+        applet.setPreferredSize(new Dimension(1000, 200));
         applet.init();
 
         JFrame mainFrame = new JFrame();
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         mainFrame.getContentPane().add(applet);
         mainFrame.pack();
@@ -27,14 +28,23 @@ public class MainApplet extends JApplet implements Runnable, KeyListener
 
         applet.start();
     }
+    */
 
-    public Engine engine = new Engine();
+    public static Engine engine = new Engine();
     TickHandler tick;
     int frameCount = 0;
 
     public void init() {
+        JRootPane rp = getRootPane();
+        InputMap map = rp.getInputMap();
+        ActionMap a_map = rp.getActionMap();
+
+        map.put(KeyStroke.getKeyStroke("UP"), "UP");
+        a_map.put("UP", saveMap);
+
         setSize(1000, 700);
         setBackground(Color.BLACK);
+        addKeyListener(this);
 
         // Initialize statics
         PopulateSettings.populate();
@@ -52,18 +62,26 @@ public class MainApplet extends JApplet implements Runnable, KeyListener
 
     public void stop()
     {
-        // TODO: Repopulate global.properties with cached settings
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
-
+    public void keyTyped(KeyEvent e)
+    {
     }
 
     @Override
-    public void keyPressed(KeyEvent e) {
-
+    public void keyPressed(KeyEvent e)
+    {
     }
+
+    private AbstractAction saveMap = new AbstractAction()
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            Output.warnln(new File(MainApplet.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile().getPath() + "\\saves\\test.odtp");
+            MapSaver.savePlayer(new File(MainApplet.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile().getPath() + "\\saves\\test", engine.protagonist);
+        }
+    };
 
     @Override
     public void keyReleased(KeyEvent e) {
@@ -76,7 +94,7 @@ public class MainApplet extends JApplet implements Runnable, KeyListener
         BufferedImage image = (BufferedImage)engine.render.newFrame();
         Graphics g2 = image.getGraphics();
         g2.setColor(Color.pink);
-        g2.drawString(Integer.toString(frameCount++), 300, 300);
+        g2.drawString(Integer.toString(frameCount), 300, 300);
         g.drawImage(image, 0, 0, this);
         tick.timeSinceLastFrame = 0;
     }
@@ -97,6 +115,4 @@ public class MainApplet extends JApplet implements Runnable, KeyListener
         }
 
     }
-
-
 }
