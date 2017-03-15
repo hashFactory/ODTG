@@ -1,5 +1,9 @@
 package Main;
 
+import Misc.GlobalProperties;
+import Misc.Output;
+import Misc.PopulateSettings;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -10,6 +14,18 @@ public class MainApplet extends JApplet implements Runnable, KeyListener
 {
     public static void main(String[] args)
     {
+        MainApplet applet = new MainApplet();
+        applet.setPreferredSize(new Dimension(1000, 700));
+        applet.init();
+
+        JFrame mainFrame = new JFrame();
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        mainFrame.getContentPane().add(applet);
+        mainFrame.pack();
+        mainFrame.setVisible(true);
+
+        applet.start();
     }
 
     public Engine engine = new Engine();
@@ -19,11 +35,14 @@ public class MainApplet extends JApplet implements Runnable, KeyListener
     public void init() {
         setSize(1000, 700);
         setBackground(Color.BLACK);
+
+        // Initialize statics
+        PopulateSettings.populate();
+
         tick = new TickHandler();
         Thread ticking = new Thread(tick);
         ticking.start();
     }
-
 
     public void start()
     {
@@ -33,7 +52,7 @@ public class MainApplet extends JApplet implements Runnable, KeyListener
 
     public void stop()
     {
-
+        // TODO: Repopulate global.properties with cached settings
     }
 
     @Override
@@ -53,7 +72,7 @@ public class MainApplet extends JApplet implements Runnable, KeyListener
 
     public void paint(Graphics g)
     {
-        //System.out.println("Frame number: " + (frameCount++));
+        Output.debugln("Frame number: " + (frameCount++));
         BufferedImage image = (BufferedImage)engine.render.newFrame();
         Graphics g2 = image.getGraphics();
         g2.setColor(Color.pink);
@@ -67,11 +86,10 @@ public class MainApplet extends JApplet implements Runnable, KeyListener
     {
         Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
 
-        // TODO: change to property loading
         while (true)
         {
             try {
-                Thread.sleep(500);
+                Thread.sleep(Long.parseLong(GlobalProperties.global.getProperty("sleep_time")));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -79,4 +97,6 @@ public class MainApplet extends JApplet implements Runnable, KeyListener
         }
 
     }
+
+
 }

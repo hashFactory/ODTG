@@ -17,7 +17,6 @@ public class TickHandler implements Runnable
 
     public void run()
     {
-        // TODO:
         long timeAtLastTick = System.currentTimeMillis();
         while (true)
         {

@@ -3,5 +3,9 @@ package Loader;
 /**
  * Created by tristan on 3/14/2017.
  */
-public class MapLoader {
+public class MapLoader
+{
+    public MapLoader(String fn)
+    {
+    }
 }
