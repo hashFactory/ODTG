@@ -6,12 +6,15 @@ import Misc.PopulateSettings;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 
 public class MainApplet extends JApplet implements Runnable, KeyListener
 {
+
     public static void main(String[] args)
     {
         MainApplet applet = new MainApplet();
@@ -28,16 +31,26 @@ public class MainApplet extends JApplet implements Runnable, KeyListener
         applet.start();
     }
 
+
     public Engine engine = new Engine();
     TickHandler tick;
     int frameCount = 0;
 
     public void init() {
+        JRootPane rp = getRootPane();
+        InputMap map = rp.getInputMap();
+        ActionMap a_map = rp.getActionMap();
+
+        map.put(KeyStroke.getKeyStroke("UP"), "UP");
+        a_map.put("UP", saveMap);
+
         setSize(1000, 700);
         setBackground(Color.BLACK);
 
         // Initialize statics
         PopulateSettings.populate();
+
+        addKeyListener(this);
 
         tick = new TickHandler();
         Thread ticking = new Thread(tick);
@@ -56,14 +69,23 @@ public class MainApplet extends JApplet implements Runnable, KeyListener
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
-
+    public void keyTyped(KeyEvent e)
+    {
     }
 
     @Override
-    public void keyPressed(KeyEvent e) {
-
+    public void keyPressed(KeyEvent e)
+    {
     }
+
+    private AbstractAction saveMap = new AbstractAction()
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            Output.warnln(new File(MainApplet.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile().getPath() + "\\saves\\test.odtp");
+            MapSaver.savePlayer(new File(MainApplet.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile().getPath() + "\\saves\\test", engine.protagonist);
+        }
+    };
 
     @Override
     public void keyReleased(KeyEvent e) {
