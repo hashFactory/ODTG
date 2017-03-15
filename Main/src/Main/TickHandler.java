@@ -1,5 +1,8 @@
 package Main;
 
+import Misc.GlobalProperties;
+import Misc.Output;
+
 /**
  * Created by tristan on 3/14/2017.
  */
@@ -12,6 +15,7 @@ public class TickHandler implements Runnable
 
     public TickHandler()
     {
+        Output.infoln("Running at " + GlobalProperties.global.getProperty("ticks_per_second") + " ticks per second");
         startTime = System.currentTimeMillis();
     }
 
@@ -23,13 +27,13 @@ public class TickHandler implements Runnable
             execute();
             timeSinceLastTick = System.currentTimeMillis()-timeAtLastTick;
             try{
-                Thread.sleep(2000-timeSinceLastTick);
+                Thread.sleep(1000 / Integer.parseInt(GlobalProperties.global.getProperty("ticks_per_second")) - timeSinceLastTick);
             }
             catch (InterruptedException e)
             {
                 e.printStackTrace();
             }
-            System.out.println(timeSinceLastTick);
+            Output.infoln("Tick");
             timeAtLastTick = System.currentTimeMillis();
         }
     }

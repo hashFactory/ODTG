@@ -1,6 +1,7 @@
 package InputEngine;
 
 import Main.MainApplet;
+import Misc.GlobalProperties;
 import Misc.MapSaver;
 import Misc.Output;
 
@@ -36,8 +37,8 @@ public class KeyboardHandler
     {
         public void actionPerformed(ActionEvent e)
         {
-            Output.warnln(MainApplet.path + File.separator + "saves" + File.separator + "test.odtp");
-            MapSaver.savePlayer( MainApplet.path + File.separator + "saves" + File.separator + "test", MainApplet.engine.protagonist);
+            Output.warnln(GlobalProperties.global.getProperty("path") + File.separator + "saves" + File.separator + "test.odtp");
+            MapSaver.savePlayer("test", MainApplet.engine.protagonist);
         }
     };
 }

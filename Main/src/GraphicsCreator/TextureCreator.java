@@ -21,16 +21,17 @@ public class TextureCreator implements Runnable
     public TextureCreator() {
         try
         {
-            File image_file = new File(MainApplet.path + File.separator + "resources" + File.separator + "textures.png");
+            File image_file = new File(GlobalProperties.global.getProperty("path") + File.separator + "resources" + File.separator + "textures.png");
             URL imageurl;
             BufferedImage image;
             if (image_file.exists())
             {
-                Output.debugln("File exists!");
+                Output.warnln("JAR is being run in production environment");
                 image = ImageIO.read(image_file);
             }
             else
             {
+                Output.warnln("JAR is being run in testing environment");
                 imageurl = getClass().getResource("/resources/textures.png");
                 image = ImageIO.read(imageurl);
             }

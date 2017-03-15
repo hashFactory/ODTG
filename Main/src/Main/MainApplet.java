@@ -30,7 +30,6 @@ public class MainApplet extends JApplet implements Runnable
         applet.start();
     }
 
-    public static String path = new File(MainApplet.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile().getAbsolutePath();
     public static Engine engine = new Engine();
     TickHandler tick;
     int frameCount = 0;
@@ -42,7 +41,6 @@ public class MainApplet extends JApplet implements Runnable
         setBackground(Color.BLACK);
 
         // Initialize statics
-        SetupFolders.setup(path);
 
         tick = new TickHandler();
         Thread ticking = new Thread(tick);
@@ -63,11 +61,11 @@ public class MainApplet extends JApplet implements Runnable
 
     public void paint(Graphics g)
     {
-        Output.debugln("Frame number: " + (frameCount++));
+        Output.infoln("Frame number: " + (frameCount++));
         BufferedImage image = (BufferedImage)engine.render.newFrame();
         Graphics g2 = image.getGraphics();
         g2.setColor(Color.pink);
-        g2.drawString(Integer.toString(frameCount++), 300, 300);
+        g2.drawString(Integer.toString(frameCount), 300, 300);
 
         g.drawImage(image, 0, 0, this);
         tick.timeSinceLastFrame = 0;
@@ -81,7 +79,7 @@ public class MainApplet extends JApplet implements Runnable
         while (true)
         {
             try {
-                Thread.sleep(Long.parseLong(GlobalProperties.global.getProperty("sleep_time")));
+                Thread.sleep(Long.parseLong(GlobalProperties.global.getProperty("frames_per_second")));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

@@ -21,9 +21,15 @@ public class MapSaver
 
         try
         {
-            PrintWriter pw = new PrintWriter(new FileOutputStream(fn + ".odtp"));
-            pw.print(map_data);
-            pw.close();
+            FileOutputStream stream = new FileOutputStream(GlobalProperties.global.getProperty("path") + File.separator + "saves" + File.separator + fn + ".odtp");
+
+            for (Byte spot: map_data) {
+                try {
+                    stream.write(spot);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         catch (FileNotFoundException ex)
         {

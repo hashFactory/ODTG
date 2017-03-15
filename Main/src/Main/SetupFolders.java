@@ -1,5 +1,6 @@
 package Main;
 
+import Misc.GlobalProperties;
 import Misc.Output;
 
 import java.io.File;
@@ -9,18 +10,31 @@ import java.io.File;
  */
 public class SetupFolders
 {
-    public static void setup(String filename)
+    public static void setup()
     {
+        String filename = GlobalProperties.global.getProperty("path");
+
         File directory = new File(filename + File.separator + "saves" + File.separator);
-        if (!directory.exists())
-            directory.mkdir();
+        if (!directory.exists()) {
+            boolean result = directory.mkdir();
+            if (result)
+                Output.warnln("Had to create ." + File.separator + "saves folder");
+            else
+                Output.errorln("Could not create ." + File.separator + "saves folder");
+        }
         else
-            Output.warnln("Could not create save folder");
+            Output.infoln("." + File.separator + "saves folder already exists");
 
         directory = new File(filename + File.separator + "resources" + File.separator);
-        if (!directory.exists())
+        if (!directory.exists()) {
             directory.mkdir();
+            boolean result = directory.mkdir();
+            if (result)
+                Output.warnln("Had to create ." + File.separator + "resources folder");
+            else
+                Output.errorln("Could not create ." + File.separator + "resources folder");
+        }
         else
-            Output.warnln("Could not create resources folder");
+            Output.infoln("." + File.separator + "resources folder already exists");
     }
 }
