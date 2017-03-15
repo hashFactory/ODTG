@@ -1,5 +1,6 @@
 package Main;
 
+import InputEngine.InputEngine;
 import Misc.GlobalProperties;
 import Misc.Output;
 import Misc.PopulateSettings;
@@ -7,12 +8,10 @@ import Misc.PopulateSettings;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-public class MainApplet extends JApplet implements Runnable, KeyListener
+public class MainApplet extends JApplet implements Runnable
 {
 
     public static void main(String[] args)
@@ -22,7 +21,7 @@ public class MainApplet extends JApplet implements Runnable, KeyListener
         applet.init();
 
         JFrame mainFrame = new JFrame();
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         mainFrame.getContentPane().add(applet);
         mainFrame.pack();
@@ -32,28 +31,25 @@ public class MainApplet extends JApplet implements Runnable, KeyListener
     }
 
 
-    public Engine engine = new Engine();
+    public static Engine engine = new Engine();
     TickHandler tick;
     int frameCount = 0;
+    public static String path = new File(MainApplet.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile().getPath();
+    public InputEngine inputEngine = new InputEngine(getRootPane());
 
-    public void init() {
-        JRootPane rp = getRootPane();
-        InputMap map = rp.getInputMap();
-        ActionMap a_map = rp.getActionMap();
-
-        map.put(KeyStroke.getKeyStroke("UP"), "UP");
-        a_map.put("UP", saveMap);
-
+    public void init()
+    {
         setSize(1000, 700);
         setBackground(Color.BLACK);
 
         // Initialize statics
         PopulateSettings.populate();
 
-        addKeyListener(this);
+        SetupFolders.setup(path);
 
         tick = new TickHandler();
         Thread ticking = new Thread(tick);
+        ticking.setPriority(Thread.MIN_PRIORITY);
         ticking.start();
     }
 
@@ -68,30 +64,6 @@ public class MainApplet extends JApplet implements Runnable, KeyListener
         // TODO: Repopulate global.properties with cached settings
     }
 
-    @Override
-    public void keyTyped(KeyEvent e)
-    {
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e)
-    {
-    }
-
-    private AbstractAction saveMap = new AbstractAction()
-    {
-        public void actionPerformed(ActionEvent e)
-        {
-            Output.warnln(new File(MainApplet.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile().getPath() + "\\saves\\test.odtp");
-            MapSaver.savePlayer(new File(MainApplet.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile().getPath() + "\\saves\\test", engine.protagonist);
-        }
-    };
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
-    }
-
     public void paint(Graphics g)
     {
         Output.debugln("Frame number: " + (frameCount++));
@@ -99,12 +71,6 @@ public class MainApplet extends JApplet implements Runnable, KeyListener
         Graphics g2 = image.getGraphics();
         g2.setColor(Color.pink);
         g2.drawString(Integer.toString(frameCount++), 300, 300);
-
-        //TODO: Replace later
-        g2.drawImage(engine.render.textureCreator.getTexture(0), 200, 400, this);
-        g2.drawImage(engine.render.textureCreator.getTexture(1), 300, 400, this);
-        g2.drawImage(engine.render.textureCreator.getTexture(2), 400, 400, this);
-        g2.drawImage(engine.render.textureCreator.getTexture(3), 500, 400, this);
 
         g.drawImage(image, 0, 0, this);
         tick.timeSinceLastFrame = 0;

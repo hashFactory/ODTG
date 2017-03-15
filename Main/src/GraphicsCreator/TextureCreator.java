@@ -14,7 +14,7 @@ public class TextureCreator implements Runnable
     Image [] textures;
 
     public TextureCreator() {
-
+        /*
         try
         {
             URL imageurl = getClass().getResource("/resources/textures.png");
@@ -36,6 +36,7 @@ public class TextureCreator implements Runnable
         {
             e.printStackTrace();
         }
+        */
     }
 
     public void run()
