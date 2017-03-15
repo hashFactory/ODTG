@@ -1,4 +1,4 @@
-package Main;
+package Misc;
 
 import Characters.Protagonist;
 import Characters.ProtagonistMethods;

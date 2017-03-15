@@ -1,8 +1,13 @@
 package GraphicsCreator;
 
+import Main.MainApplet;
+import Misc.GlobalProperties;
+import Misc.Output;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
@@ -14,11 +19,21 @@ public class TextureCreator implements Runnable
     Image [] textures;
 
     public TextureCreator() {
-        /*
         try
         {
-            URL imageurl = getClass().getResource("/resources/textures.png");
-            BufferedImage image = ImageIO.read(imageurl);
+            File image_file = new File(MainApplet.path + File.separator + "resources" + File.separator + "textures.png");
+            URL imageurl;
+            BufferedImage image;
+            if (image_file.exists())
+            {
+                Output.debugln("File exists!");
+                image = ImageIO.read(image_file);
+            }
+            else
+            {
+                imageurl = getClass().getResource("/resources/textures.png");
+                image = ImageIO.read(imageurl);
+            }
 
             int rows = image.getHeight()/16;
             int columns = image.getWidth()/16;
@@ -36,7 +51,7 @@ public class TextureCreator implements Runnable
         {
             e.printStackTrace();
         }
-        */
+
     }
 
     public void run()

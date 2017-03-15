@@ -1,5 +1,8 @@
 package Misc;
 
+import Main.MainApplet;
+
+import java.io.File;
 import java.util.Enumeration;
 import java.util.ResourceBundle;
 
@@ -17,5 +20,7 @@ public class PopulateSettings
             String key = (String)rb_keys.nextElement();
             GlobalProperties.global.put(key, rb.getObject(key));
         }
+
+        GlobalProperties.global.put("path", new File(MainApplet.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile().getAbsolutePath());
     }
 }

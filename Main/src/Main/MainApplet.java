@@ -7,7 +7,6 @@ import Misc.PopulateSettings;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
@@ -16,6 +15,7 @@ public class MainApplet extends JApplet implements Runnable
 
     public static void main(String[] args)
     {
+
         MainApplet applet = new MainApplet();
         applet.setPreferredSize(new Dimension(1000, 700));
         applet.init();
@@ -30,11 +30,10 @@ public class MainApplet extends JApplet implements Runnable
         applet.start();
     }
 
-
+    public static String path = new File(MainApplet.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile().getAbsolutePath();
     public static Engine engine = new Engine();
     TickHandler tick;
     int frameCount = 0;
-    public static String path = new File(MainApplet.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile().getPath();
     public InputEngine inputEngine = new InputEngine(getRootPane());
 
     public void init()
@@ -43,8 +42,6 @@ public class MainApplet extends JApplet implements Runnable
         setBackground(Color.BLACK);
 
         // Initialize statics
-        PopulateSettings.populate();
-
         SetupFolders.setup(path);
 
         tick = new TickHandler();

@@ -1,7 +1,7 @@
 package InputEngine;
 
 import Main.MainApplet;
-import Main.MapSaver;
+import Misc.MapSaver;
 import Misc.Output;
 
 import javax.swing.*;

@@ -4,6 +4,7 @@ import GraphicsCreator.AnimationCreator;
 import GraphicsCreator.SpriteCreator;
 import GraphicsCreator.TextureCreator;
 import GraphicsCreator.UICreator;
+import Objects.Chunk;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -49,8 +50,10 @@ public class Render
 
     public Image newFrame()
     {
+        Chunk[] chunks = new Chunk[3];
         BufferedImage frame = new BufferedImage(1000, 700, BufferedImage.TYPE_3BYTE_BGR);
         frame.setRGB(100, 100, 73465);
+        frame = mapRender.draw(frame, new Chunk[2]);
         frame = shaderRender.draw(frame);
         //frame = mapRender.draw(frame);
         return frame;
