@@ -15,6 +15,9 @@ import java.util.Properties;
  */
 public class Render
 {
+    //TODO: Possibly find a better way to deal with this
+    public int cameraX, cameraY;
+
     public TextureCreator textureCreator;
     public SpriteCreator spriteCreator;
     public UICreator uiCreator;

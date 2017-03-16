@@ -34,4 +34,26 @@ public class ChunkMethods
 
         return value;
     }
+
+    /*
+     * Assuming the x & y values are the relative coordinates of the top left pixel, this should return all the chunks
+     * that could possibly be shown in a 1000*600 grid. Once we come up with how we want to scale things we can confirm
+     * that these are the right values.
+     */
+    public static ArrayList<Chunk> getVisibleChunks(Chunk[][] chunk, int x, int y)
+    {
+        ArrayList<Chunk> active = new ArrayList<>();
+        int cameraChunkX = x/16;
+        int cameraChunkY = y/16;
+
+        for(int i=0;i<4;i++)       //    1000/16^2 is a bit under 4.
+        {
+            for(int j=0;j<3;j++)   //    700/16^2 is a bit under 3.
+            {
+                active.add(chunk[cameraChunkX+i][cameraChunkY+j]);
+            }
+        }
+
+        return active;
+    }
 }
