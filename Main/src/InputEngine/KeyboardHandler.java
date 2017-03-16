@@ -31,6 +31,7 @@ public class KeyboardHandler
 
         // ADD ELEMENTS TO MAP
         a_map.put("UP", up);
+        a_map.put("DOWN", down);
     }
 
     private AbstractAction up = new AbstractAction()
@@ -39,6 +40,15 @@ public class KeyboardHandler
         {
             Output.warnln(GlobalProperties.global.getProperty("path") + File.separator + "saves" + File.separator + "test.odtp");
             MapSaver.savePlayer("test", MainApplet.engine.protagonist);
+        }
+    };
+
+    private AbstractAction down = new AbstractAction()
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            Output.warnln(GlobalProperties.global.getProperty("path") + File.separator + "saves" + File.separator + "test.odt1");
+            MapSaver.saveMap("test", MainApplet.engine.map);
         }
     };
 }
