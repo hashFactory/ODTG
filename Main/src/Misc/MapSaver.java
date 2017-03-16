@@ -17,6 +17,8 @@ public class MapSaver
     {
         ArrayList<Byte> map_data = new ArrayList<>();
 
+        // TODO: Add saving of seed and file version
+        // TODO: .odts (stats) contains stats such as seed and file version
         map_data.addAll(ProtagonistMethods.toArrayList(p));
 
         try

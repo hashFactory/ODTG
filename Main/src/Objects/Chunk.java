@@ -5,11 +5,11 @@ package Objects;
  */
 public class Chunk
 {
-    int dimension = 1;
-    int x = 0, y = 0;
-    long seed = 0;
-    short[][] block_id = new short[16][16];
-    byte[][] floor_id = new byte[16][16];
+    public int dimension = 1;
+    public int x = 0, y = 0;
+    public long seed = 0;
+    public short[][] block_id = new short[16][16];
+    public byte[][] floor_id = new byte[16][16];
 
     public Chunk(int _x, int _y, int _dimension, long _seed)
     {

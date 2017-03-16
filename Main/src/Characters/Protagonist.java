@@ -8,14 +8,16 @@ import java.awt.*;
 public class Protagonist
 {
     // TODO: Get animations for character
+    // TODO: This version has no
     Image sprite;
-    int x_chunk = 0, y_chunk = 0;
-    int dimension = 0;
-    float x = 0, y = 0;
-    String username = "";
-    byte[] special_items = new byte[8];
+    public int x_chunk = 0, y_chunk = 0;
+    public int dimension = 0;
+    public float x = 0, y = 0;
+    public String username = "";
+    public short[] special_items = new short[8];
     // 9x9 MAX INVENTORY SIZE
-    short[][] inventory = new short[9][10];
+    // With 1 row for hotbar
+    public short[][] inventory = new short[9][10];
 
     public Protagonist()
     {
