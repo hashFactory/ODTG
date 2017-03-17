@@ -3,7 +3,6 @@ package Main;
 import InputEngine.InputEngine;
 import Misc.GlobalProperties;
 import Misc.Output;
-import Misc.PopulateSettings;
 
 import javax.swing.*;
 import java.awt.*;
@@ -75,7 +74,7 @@ public class MainApplet extends JApplet implements Runnable
         while (true)
         {
             try {
-                Thread.sleep(Long.parseLong(GlobalProperties.global.getProperty("frames_per_second")));
+                Thread.sleep(1000 / Long.parseLong(GlobalProperties.global.getProperty("frames_per_second")));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
