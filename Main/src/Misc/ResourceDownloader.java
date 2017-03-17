@@ -19,26 +19,26 @@ public class ResourceDownloader
 
     public static boolean populate()
     {
-        File textures = new File(GlobalProperties.global.getProperty("path") + File.separator + "resources" + File.separator + "textures.png");
+        File textures = new File(GlobalProperties.global.getProperty("path") + File.separator + "resources" + File.separator + GlobalProperties.global.getProperty("block_texture_name"));
         if (!textures.exists())
         {
             try {
-                URL textures_url = new URL("https://raw.githubusercontent.com/hashFactory/ODTG/master/Main/src/Resources/textures.png");
+                URL textures_url = new URL("https://raw.githubusercontent.com/hashFactory/ODTG/master/Main/src/Resources/" + GlobalProperties.global.getProperty("block_texture_name"));
                 Files.copy(textures_url.openStream(), textures.toPath());
-                Output.debugln("Successfully populated ." + File.separator + "resources" + File.separator + "textures.png");
+                Output.debugln("Successfully populated ." + File.separator + "resources" + File.separator + GlobalProperties.global.getProperty("block_texture_name"));
             } catch (MalformedURLException e)
             {
-                Output.errorln("Could not form URL for textures.png from GitHub");
+                Output.errorln("Could not form URL for " + GlobalProperties.global.getProperty("block_texture_name") + " from GitHub");
                 e.printStackTrace();
                 return false;
             } catch (IOException e) {
-                Output.errorln("Could not open stream to textures.png");
+                Output.errorln("Could not open stream to " + GlobalProperties.global.getProperty("block_texture_name") + "textures.png");
                 e.printStackTrace();
                 return false;
             }
         }
         else
-            Output.debugln("Loaded textures.png without downloading it!");
+            Output.debugln("Loaded " + GlobalProperties.global.getProperty("block_texture_name") + " without downloading it!");
 
         return true;
     }

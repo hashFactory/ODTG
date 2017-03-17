@@ -19,9 +19,10 @@ public class TextureCreator implements Runnable
     Image [] textures;
 
     public TextureCreator() {
+        // TODO: Implement global property for texture width and height
         try
         {
-            File image_file = new File(GlobalProperties.global.getProperty("path") + File.separator + "resources" + File.separator + "textures.png");
+            File image_file = new File(GlobalProperties.global.getProperty("path") + File.separator + "resources" + File.separator + GlobalProperties.global.getProperty("block_texture_name"));
             URL imageurl;
             BufferedImage image;
             if (image_file.exists())
@@ -32,7 +33,7 @@ public class TextureCreator implements Runnable
             else
             {
                 Output.warnln("JAR is being run in testing environment");
-                imageurl = getClass().getResource("/resources/textures.png");
+                imageurl = getClass().getResource("/resources/" + GlobalProperties.global.getProperty("block_texture_name"));
                 image = ImageIO.read(imageurl);
             }
 
