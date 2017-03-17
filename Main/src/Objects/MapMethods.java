@@ -32,8 +32,8 @@ public class MapMethods
         int tile_x = (int)(x_mul * 16 * Integer.valueOf(GlobalProperties.global.getProperty("block_texture_width")));
         int tile_y = (int)(y_mul * 16 * Integer.valueOf(GlobalProperties.global.getProperty("block_texture_height")));
 
-        int radius_x = (center_x / tile_x) + 2;
-        int radius_y = (center_y / tile_y) + 2;
+        int radius_x = (center_x / tile_x) + 1;
+        int radius_y = (center_y / tile_y) + 1;
 
         for (int i = -radius_x; i < radius_x; i++)
             for (int j = -radius_y; j < radius_y; j++)

@@ -63,7 +63,7 @@ public class MapLoader
                 for (int j = 0; j < 16; j++)
                     chunk.floor_id[i][j] = file.get();
 
-            if (file.position() % 780 != 0)
+            if (file.position() % 778 != 0)
             {
                 Output.errorln("Incorrect buffer size for chunk");
                 //System.exit(13);
