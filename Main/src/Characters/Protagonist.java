@@ -9,7 +9,7 @@ public class Protagonist
 {
     // TODO: Get animations for character
     // TODO: This version has no
-    Image sprite;
+    public static Image sprite;
     public int x_chunk = 0, y_chunk = 0;
     public int dimension = 0;
     public float x = 0, y = 0;

@@ -60,6 +60,7 @@ public class Render
         BufferedImage frame = new BufferedImage(1000, 700, BufferedImage.TYPE_3BYTE_BGR);
         frame.setRGB(100, 100, 73465);
         frame = mapRender.draw(frame);
+        frame = characterRender.draw(frame);
         frame = shaderRender.draw(frame);
         //frame = mapRender.draw(frame);
         return frame;
