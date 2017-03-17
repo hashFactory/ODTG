@@ -1,5 +1,6 @@
 package InputEngine;
 
+import Loader.MapLoader;
 import Main.MainApplet;
 import Misc.GlobalProperties;
 import Misc.MapSaver;
@@ -24,6 +25,7 @@ public class KeyboardHandler
         map.put(KeyStroke.getKeyStroke("UP"), "UP");
         map.put(KeyStroke.getKeyStroke("DOWN"), "DOWN");
         map.put(KeyStroke.getKeyStroke("LEFT"), "LEFT");
+        map.put(KeyStroke.getKeyStroke("RIGHT"), "RIGHT");
 
         // SPACE to `
         for (int i = 32; i < 96; i++)
@@ -37,6 +39,7 @@ public class KeyboardHandler
         // ADD ELEMENTS TO MAP
         a_map.put("UP", up);
         a_map.put("DOWN", down);
+        a_map.put("RIGHT", right);
     }
 
     private AbstractAction pressedAction = new AbstractAction()
@@ -54,6 +57,14 @@ public class KeyboardHandler
         {
             int character = e.getActionCommand().toCharArray()[0];
             InputEngine.keyStroke[character] = false;
+        }
+    };
+
+    private AbstractAction right = new AbstractAction()
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            MainApplet.engine.map = MapLoader.loadMap(MainApplet.engine.map, "test");
         }
     };
 

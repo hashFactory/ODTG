@@ -20,7 +20,4 @@ public class InputEngine
         jrp = _jrp;
         kh = new KeyboardHandler(jrp);
     }
-
-
-
 }

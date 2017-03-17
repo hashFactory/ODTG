@@ -27,7 +27,7 @@ public class MapLoader
 
         int map_length = (int)new File(GlobalProperties.global.getProperty("path") + File.separator + "saves" + File.separator + fn + ".odt" + Integer.toString(number)).length();
 
-        ByteBuffer file = ByteBuffer.allocate(map_length);
+        ByteBuffer file = ByteBuffer.allocate(map_length * 2);
 
         try {
             map_file_stream = new FileInputStream(GlobalProperties.global.getProperty("path") + File.separator + "saves" + File.separator + fn + ".odt" + Integer.toString(number));
@@ -66,7 +66,7 @@ public class MapLoader
             if (file.position() % 780 != 0)
             {
                 Output.errorln("Incorrect buffer size for chunk");
-                System.exit(13);
+                //System.exit(13);
             }
             map.chunks.put(chunk.x + "," + chunk.y + "," + chunk.dimension, chunk);
         }

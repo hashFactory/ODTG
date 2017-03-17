@@ -22,7 +22,7 @@ public class ChunkCreator
 
         for (int i = 0; i < 256; i+=Math.random() * 8)
         {
-            chunk.block_id[i / 16][i % 16] = 4;
+            chunk.block_id[i / 16][i % 16] = 9;
         }
 
         return chunk;
