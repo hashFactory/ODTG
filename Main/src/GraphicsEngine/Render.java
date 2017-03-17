@@ -4,6 +4,7 @@ import GraphicsCreator.AnimationCreator;
 import GraphicsCreator.SpriteCreator;
 import GraphicsCreator.TextureCreator;
 import GraphicsCreator.UICreator;
+import InputEngine.KeyboardHandler;
 import Main.MainApplet;
 import Objects.Chunk;
 
@@ -54,6 +55,7 @@ public class Render
 
     public Image newFrame()
     {
+        KeyboardHandler.interpret();
         Chunk[] chunks = new Chunk[3];
         BufferedImage frame = new BufferedImage(1000, 700, BufferedImage.TYPE_3BYTE_BGR);
         frame.setRGB(100, 100, 73465);

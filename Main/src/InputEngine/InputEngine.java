@@ -11,6 +11,8 @@ public class InputEngine
     public MouseHandler mh = new MouseHandler();
     public GamepadHandler gh = new GamepadHandler();
 
+    public static boolean[] keyStroke = new boolean[512];
+
     public JRootPane jrp;
 
     public InputEngine(JRootPane _jrp)

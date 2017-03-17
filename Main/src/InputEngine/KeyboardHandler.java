@@ -27,12 +27,35 @@ public class KeyboardHandler
 
         // SPACE to `
         for (int i = 32; i < 96; i++)
-            map.put(KeyStroke.getKeyStroke(Character.toString((char)i)), Character.toString((char)i));
+            map.put(KeyStroke.getKeyStroke(Character.toString((char)i)), "pressedAction");
+        for (int i = 32; i < 96; i++)
+            map.put(KeyStroke.getKeyStroke("released " + Character.toString((char)i)), "releasedAction");
+
+        a_map.put("pressedAction", pressedAction);
+        a_map.put("releasedAction", releasedAction);
 
         // ADD ELEMENTS TO MAP
         a_map.put("UP", up);
         a_map.put("DOWN", down);
     }
+
+    private AbstractAction pressedAction = new AbstractAction()
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            int character = e.getActionCommand().toCharArray()[0];
+            InputEngine.keyStroke[character] = true;
+        }
+    };
+
+    private AbstractAction releasedAction = new AbstractAction()
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            int character = e.getActionCommand().toCharArray()[0];
+            InputEngine.keyStroke[character] = false;
+        }
+    };
 
     private AbstractAction up = new AbstractAction()
     {
@@ -51,4 +74,55 @@ public class KeyboardHandler
             MapSaver.saveMap("test", MainApplet.engine.map);
         }
     };
+
+    private AbstractAction w = new AbstractAction()
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            InputEngine.keyStroke['w'] = true;
+        }
+    };
+
+    public static void interpret()
+    {
+        if (InputEngine.keyStroke['w'])
+        {
+            MainApplet.engine.protagonist.y--;
+            if (MainApplet.engine.protagonist.y < 0)
+            {
+                MainApplet.engine.protagonist.y_chunk++;
+                MainApplet.engine.protagonist.y += 256;
+            }
+        }
+
+        if (InputEngine.keyStroke['s'])
+        {
+            MainApplet.engine.protagonist.y++;
+            if (MainApplet.engine.protagonist.y > 256)
+            {
+                MainApplet.engine.protagonist.y_chunk--;
+                MainApplet.engine.protagonist.y -= 256;
+            }
+        }
+
+        if (InputEngine.keyStroke['a'])
+        {
+            MainApplet.engine.protagonist.x--;
+            if (MainApplet.engine.protagonist.x < 0)
+            {
+                MainApplet.engine.protagonist.x_chunk++;
+                MainApplet.engine.protagonist.x += 256;
+            }
+        }
+
+        if (InputEngine.keyStroke['d'])
+        {
+            MainApplet.engine.protagonist.x++;
+            if (MainApplet.engine.protagonist.x > 256)
+            {
+                MainApplet.engine.protagonist.x_chunk--;
+                MainApplet.engine.protagonist.x -= 256;
+            }
+        }
+    }
 }

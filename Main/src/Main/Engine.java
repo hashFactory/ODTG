@@ -2,6 +2,7 @@ package Main;
 
 import Characters.Protagonist;
 import GraphicsEngine.Render;
+import InputEngine.KeyboardHandler;
 import Misc.GlobalProperties;
 import Misc.Output;
 import Misc.PopulateSettings;
