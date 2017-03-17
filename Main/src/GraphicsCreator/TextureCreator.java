@@ -44,7 +44,7 @@ public class TextureCreator implements Runnable
             {
                 for (int j=0;j<columns;j++)
                 {
-                    textures[(i*columns)+j] = image.getSubimage(j*16, i*16, 16, 16);
+                    textures[(i*columns)+j] = image.getSubimage(j*16, i*16, 16, 16).getScaledInstance(16 * Integer.valueOf(GlobalProperties.global.getProperty("x_multiplier")), 16 * Integer.valueOf(GlobalProperties.global.getProperty("y_multiplier")), Image.SCALE_REPLICATE);
                 }
             }
         }

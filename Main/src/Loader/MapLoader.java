@@ -68,7 +68,7 @@ public class MapLoader
                 Output.errorln("Incorrect buffer size for chunk");
                 System.exit(13);
             }
-            map.chunks.add(chunk);
+            map.chunks.put(chunk.x + "," + chunk.y + "," + chunk.dimension, chunk);
         }
 
         return map;

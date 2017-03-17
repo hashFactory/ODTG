@@ -8,7 +8,6 @@ import Misc.PopulateSettings;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 
 public class MainApplet extends JApplet implements Runnable
 {

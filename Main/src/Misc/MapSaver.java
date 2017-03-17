@@ -49,7 +49,7 @@ public class MapSaver
     {
         ArrayList<Byte> chunk_data = new ArrayList<>();
 
-        for (Chunk chunk: map.chunks)
+        for (Chunk chunk: map.chunks.values())
             chunk_data.addAll(ChunkMethods.toArrayList(chunk));
 
         try

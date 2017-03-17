@@ -2,6 +2,7 @@ package Main;
 
 import Misc.GlobalProperties;
 import Misc.Output;
+import Objects.MapMethods;
 
 /**
  * Created by tristan on 3/14/2017.
@@ -40,6 +41,10 @@ public class TickHandler implements Runnable
 
     public void execute()
     {
+        String[] output = MapMethods.getCloseChunks(MainApplet.engine.protagonist);
+        for (String string: output)
+            Output.debug(string + "\t");
+        Output.debug("\n");
         try {
             Thread.sleep(10);
         } catch (InterruptedException e) {
