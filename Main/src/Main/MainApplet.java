@@ -62,9 +62,6 @@ public class MainApplet extends JApplet implements Runnable
     {
         Output.infoln("Frame number: " + (frameCount++));
         BufferedImage image = (BufferedImage)engine.render.newFrame();
-        Graphics g2 = image.getGraphics();
-        g2.setColor(Color.pink);
-        g2.drawString(Integer.toString(frameCount), 300, 300);
 
         g.drawImage(image, 0, 0, this);
         tick.timeSinceLastFrame = 0;

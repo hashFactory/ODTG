@@ -17,17 +17,12 @@ public class ChunkCreator
             for (int j = 0; j < 16; j++)
             {
                 chunk.floor_id[i][j] = 0;
-                chunk.block_id[i][j] = 0;
             }
         }
 
-        for (int i = 0; i < 16; i+=15)
+        for (int i = 0; i < 256; i+=Math.random() * 8)
         {
-            for (int j = 0; j < 16; j++)
-            {
-                chunk.block_id[i][j] = 1;
-                chunk.block_id[j][i] = 1;
-            }
+            chunk.block_id[i / 16][i % 16] = 4;
         }
 
         return chunk;

@@ -37,15 +37,19 @@ public class TextureCreator implements Runnable
                 image = ImageIO.read(imageurl);
             }
 
-            int rows = image.getHeight()/16;
-            int columns = image.getWidth()/16;
+            int rows = image.getHeight() / Integer.valueOf(GlobalProperties.global.getProperty("block_texture_width"));
+            int columns = image.getWidth()/ Integer.valueOf(GlobalProperties.global.getProperty("block_texture_height"));
+
+            int tile_width = Integer.valueOf(GlobalProperties.global.getProperty("block_texture_width"));
+            int tile_height = Integer.valueOf(GlobalProperties.global.getProperty("block_texture_height"));
+
             textures = new Image[rows*columns];
 
             for (int i=0;i<rows;i++)
             {
                 for (int j=0;j<columns;j++)
                 {
-                    textures[(i*columns)+j] = image.getSubimage(j*16, i*16, 16, 16).getScaledInstance(16 * Integer.valueOf(GlobalProperties.global.getProperty("x_multiplier")), 16 * Integer.valueOf(GlobalProperties.global.getProperty("y_multiplier")), Image.SCALE_REPLICATE);
+                    textures[(i*columns)+j] = image.getSubimage(j*tile_width, i*tile_height, tile_width, tile_height).getScaledInstance(tile_width * Integer.valueOf(GlobalProperties.global.getProperty("x_multiplier")), tile_height * Integer.valueOf(GlobalProperties.global.getProperty("y_multiplier")), Image.SCALE_REPLICATE);
                 }
             }
         }
