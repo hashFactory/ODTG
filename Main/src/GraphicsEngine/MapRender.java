@@ -25,6 +25,7 @@ public class MapRender
         String[] chunks = MapMethods.getCloseChunks(MainApplet.engine.protagonist);
 
         Graphics2D g2 = (Graphics2D)image.getGraphics();
+        g2.clearRect(0, 0, image.getWidth(), image.getHeight());
 
         for (int i = 0; i < chunks.length; i++)
         {
