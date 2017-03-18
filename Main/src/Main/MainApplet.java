@@ -4,9 +4,8 @@ import InputEngine.InputEngine;
 import Misc.GlobalProperties;
 import Misc.Output;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
+import javax.swing.*;
 
 public class MainApplet extends JApplet implements Runnable
 {
@@ -61,6 +60,7 @@ public class MainApplet extends JApplet implements Runnable
     {
         Output.infoln("Frame number: " + (frameCount++));
 
+        inputEngine.kh.interpret();
         g.drawImage(engine.render.newFrame(), 0, 0, this);
         tick.timeSinceLastFrame = 0;
     }

@@ -51,11 +51,14 @@ public class MapRender
 
             MainApplet.engine.map.chunks.computeIfAbsent(chunks[i], k -> ChunkCreator.createChunk(chunk_x, chunk_y, dimension, MainApplet.engine.map.seed));
 
+            double chunk_image_x = (MainApplet.engine.protagonist.x_chunk - MainApplet.engine.map.chunks.get(chunks[i]).x) * (16 * scaled_x) - (MainApplet.engine.protagonist.x * x_multiplier) + width / 2;
+            double chunk_image_y = (MainApplet.engine.protagonist.y_chunk - MainApplet.engine.map.chunks.get(chunks[i]).y) * (16 * scaled_y) - (MainApplet.engine.protagonist.y * y_multiplier) + height / 2;
+
             for (int x = 0; x < 16; x++)
             {
                 for (int y = 0; y < 16; y++) {
-                    double image_x = (MainApplet.engine.protagonist.x_chunk - MainApplet.engine.map.chunks.get(chunks[i]).x) * (16 * scaled_x) - (MainApplet.engine.protagonist.x * x_multiplier) + (scaled_x * x) + width / 2;
-                    double image_y = (MainApplet.engine.protagonist.y_chunk - MainApplet.engine.map.chunks.get(chunks[i]).y) * (16 * scaled_y) - (MainApplet.engine.protagonist.y * y_multiplier) + (scaled_y * y) + height / 2;
+                    double image_x = chunk_image_x + (scaled_x * x);
+                    double image_y = chunk_image_y + (scaled_y * y);
 
                     if (image_x + scaled_x > 0 && image_y + scaled_y > 0 && image_x < width && image_y < height)
                     {
