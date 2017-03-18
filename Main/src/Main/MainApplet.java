@@ -81,6 +81,4 @@ public class MainApplet extends JApplet implements Runnable
         }
 
     }
-
-
 }
