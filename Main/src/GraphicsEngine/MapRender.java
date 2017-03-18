@@ -2,6 +2,7 @@ package GraphicsEngine;
 
 import Main.MainApplet;
 import Misc.GlobalProperties;
+import Misc.Output;
 import Objects.MapMethods;
 import ProceduralGeneration.ChunkCreator;
 
@@ -15,9 +16,23 @@ import static Main.MainApplet.engine;
  */
 public class MapRender
 {
+    int width, height;
+    double scaled_x, scaled_y;
+    double x_multiplier, y_multiplier;
+
     public MapRender()
     {
+        setScale();
+    }
 
+    public void setScale()
+    {
+        width = Integer.valueOf(GlobalProperties.global.getProperty("width"));
+        height = Integer.valueOf(GlobalProperties.global.getProperty("height"));
+        x_multiplier = Double.valueOf(GlobalProperties.global.getProperty("x_multiplier"));
+        y_multiplier = Double.valueOf(GlobalProperties.global.getProperty("y_multiplier"));
+        scaled_x = Integer.valueOf(GlobalProperties.global.getProperty("block_texture_width")) * x_multiplier;
+        scaled_y = Integer.valueOf(GlobalProperties.global.getProperty("block_texture_height")) * y_multiplier;
     }
 
     public BufferedImage draw(BufferedImage image)
@@ -26,11 +41,6 @@ public class MapRender
 
         Graphics2D g2 = (Graphics2D)image.getGraphics();
         g2.clearRect(0, 0, image.getWidth(), image.getHeight());
-
-        double x_multiplier = Double.valueOf(GlobalProperties.global.getProperty("x_multiplier"));
-        double y_multiplier = Double.valueOf(GlobalProperties.global.getProperty("y_multiplier"));
-        double scaled_x = Integer.valueOf(GlobalProperties.global.getProperty("block_texture_width")) * x_multiplier;
-        double scaled_y = Integer.valueOf(GlobalProperties.global.getProperty("block_texture_height")) * y_multiplier;
 
         for (int i = 0; i < chunks.length; i++)
         {
@@ -44,17 +54,16 @@ public class MapRender
             for (int x = 0; x < 16; x++)
             {
                 for (int y = 0; y < 16; y++) {
-                    double image_x = (MainApplet.engine.protagonist.x_chunk - MainApplet.engine.map.chunks.get(chunks[i]).x) * (16 * scaled_x) - (MainApplet.engine.protagonist.x * x_multiplier) + (scaled_x * x) + Integer.valueOf(GlobalProperties.global.getProperty("width")) / 2;
-                    double image_y = (MainApplet.engine.protagonist.y_chunk - MainApplet.engine.map.chunks.get(chunks[i]).y) * (16 * scaled_y) - (MainApplet.engine.protagonist.y * y_multiplier) + (scaled_y * y) + Integer.valueOf(GlobalProperties.global.getProperty("height")) / 2;
+                    double image_x = (MainApplet.engine.protagonist.x_chunk - MainApplet.engine.map.chunks.get(chunks[i]).x) * (16 * scaled_x) - (MainApplet.engine.protagonist.x * x_multiplier) + (scaled_x * x) + width / 2;
+                    double image_y = (MainApplet.engine.protagonist.y_chunk - MainApplet.engine.map.chunks.get(chunks[i]).y) * (16 * scaled_y) - (MainApplet.engine.protagonist.y * y_multiplier) + (scaled_y * y) + height / 2;
 
-                    if (image_x + scaled_x > 0 && image_y + scaled_y > 0 && image_x < Integer.valueOf(GlobalProperties.global.getProperty("width")) && image_y < Integer.valueOf(GlobalProperties.global.getProperty("height")))
+                    if (image_x + scaled_x > 0 && image_y + scaled_y > 0 && image_x < width && image_y < height)
                     {
                         g2.drawImage(engine.render.textureCreator.getTexture(MainApplet.engine.map.chunks.get(chunks[i]).block_id[x][y]), (int) image_x, (int) image_y, null);
                     }
                 }
             }
         }
-
         return image;
     }
 }
