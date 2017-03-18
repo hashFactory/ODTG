@@ -60,9 +60,8 @@ public class MainApplet extends JApplet implements Runnable
     public void paint(Graphics g)
     {
         Output.infoln("Frame number: " + (frameCount++));
-        BufferedImage image = (BufferedImage)engine.render.newFrame();
 
-        g.drawImage(image, 0, 0, this);
+        g.drawImage(engine.render.newFrame(), 0, 0, this);
         tick.timeSinceLastFrame = 0;
     }
 
@@ -82,6 +81,4 @@ public class MainApplet extends JApplet implements Runnable
         }
 
     }
-
-
 }
