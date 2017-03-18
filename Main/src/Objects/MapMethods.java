@@ -3,6 +3,7 @@ package Objects;
 import Characters.Protagonist;
 import Main.MainApplet;
 import Misc.GlobalProperties;
+import Misc.Output;
 
 import java.util.ArrayList;
 
@@ -38,6 +39,38 @@ public class MapMethods
         for (int i = -radius_x; i < radius_x; i++)
             for (int j = -radius_y; j < radius_y; j++)
                 chunks.add(Integer.toString(i + pro_x) + "," + Integer.toString(j + pro_y) + "," + pro_dim);
+
+        // Return statement
+        String[] final_chunks = new String[chunks.size()];
+        for (int i = 0; i < final_chunks.length; i++)
+            final_chunks[i] = chunks.get(i);
+        return final_chunks;
+    }
+
+    public static String[] getRenderableChunks(Protagonist pro)
+    {
+        ArrayList<String> chunks = new ArrayList<>();
+
+        int pro_x = pro.x_chunk;
+        int pro_y = pro.y_chunk;
+        int pro_dim = pro.dimension;
+
+        int window_width = Integer.valueOf(GlobalProperties.global.getProperty("width"));
+        int window_height = Integer.valueOf(GlobalProperties.global.getProperty("height"));
+        int center_x = window_width / 2;
+        int center_y = window_height / 2;
+
+        double scaled_x = Integer.valueOf(GlobalProperties.global.getProperty("block_texture_width")) * Double.valueOf(GlobalProperties.global.getProperty("x_multiplier"));;
+        double scaled_y = Integer.valueOf(GlobalProperties.global.getProperty("block_texture_height")) * Double.valueOf(GlobalProperties.global.getProperty("y_multiplier"));;
+
+        double chunkWidth = scaled_x*16;
+        double chunkHeight =  scaled_y*16;
+
+        int beginX, endX, beginY, endY;
+
+        /*for (int i = beginX; i < endX; i++)
+            for (int j = beginY; j < endY; j++)
+                chunks.add(Integer.toString(i + pro_x) + "," + Integer.toString(j + pro_y) + "," + pro_dim); */
 
         // Return statement
         String[] final_chunks = new String[chunks.size()];
