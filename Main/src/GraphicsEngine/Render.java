@@ -52,11 +52,10 @@ public class Render
 
     public Image newFrame()
     {
-        KeyboardHandler.interpret();
         frame = mapRender.draw(frame);
         frame = characterRender.draw(frame);
         frame = shaderRender.draw(frame);
-        //frame = mapRender.draw(frame);
+
         return frame;
     }
 }
