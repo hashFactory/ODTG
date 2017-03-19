@@ -70,14 +70,23 @@ public class MainApplet extends JApplet implements Runnable
     {
         Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
 
+        long timeAtLastTick = System.currentTimeMillis();
+        long timeSinceLastTick = System.currentTimeMillis();
         while (true)
         {
+            repaint();
+            timeSinceLastTick = System.currentTimeMillis()-timeAtLastTick;
+
             try {
-                Thread.sleep(1000 / Long.parseLong(GlobalProperties.global.getProperty("frames_per_second")));
+                Thread.sleep((1000 / Long.parseLong(GlobalProperties.global.getProperty("frames_per_second"))-timeSinceLastTick));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            repaint();
+
+            double FPS = 1000/(System.currentTimeMillis()-timeAtLastTick);
+            Output.infoln("Render - " + FPS + " , " + timeSinceLastTick);
+
+            timeAtLastTick = System.currentTimeMillis();
         }
 
     }
