@@ -57,20 +57,29 @@ public class MapMethods
 
         int window_width = Integer.valueOf(GlobalProperties.global.getProperty("width"));
         int window_height = Integer.valueOf(GlobalProperties.global.getProperty("height"));
-        int center_x = window_width / 2;
-        int center_y = window_height / 2;
-
-        double scaled_x = Integer.valueOf(GlobalProperties.global.getProperty("block_texture_width")) * Double.valueOf(GlobalProperties.global.getProperty("x_multiplier"));;
-        double scaled_y = Integer.valueOf(GlobalProperties.global.getProperty("block_texture_height")) * Double.valueOf(GlobalProperties.global.getProperty("y_multiplier"));;
-
+        double x_mul = Double.valueOf(GlobalProperties.global.getProperty("x_multiplier"));
+        double y_mul = Double.valueOf(GlobalProperties.global.getProperty("y_multiplier"));
+        double scaled_x = Integer.valueOf(GlobalProperties.global.getProperty("block_texture_width")) * x_mul;
+        double scaled_y = Integer.valueOf(GlobalProperties.global.getProperty("block_texture_height")) * y_mul;
         double chunkWidth = scaled_x*16;
         double chunkHeight =  scaled_y*16;
+        double chunk_image_x = (MainApplet.engine.protagonist.x_chunk - pro_x * (16 * scaled_x) - (MainApplet.engine.protagonist.x * x_mul) + window_width / 2);
+        double chunk_image_y = (MainApplet.engine.protagonist.y_chunk - pro_y * (16 * scaled_y) - (MainApplet.engine.protagonist.y * y_mul) + window_height / 2);
 
         int beginX, endX, beginY, endY;
 
-        /*for (int i = beginX; i < endX; i++)
-            for (int j = beginY; j < endY; j++)
-                chunks.add(Integer.toString(i + pro_x) + "," + Integer.toString(j + pro_y) + "," + pro_dim); */
+        //TODO: This is what I think is broken - the next 4 lines.
+        beginX = (int)(chunk_image_x/chunkWidth)-1;
+        endX = (int)((window_width-(chunk_image_x+chunkWidth))/chunkWidth)+1;
+
+        beginY = (int)(chunk_image_y/chunkHeight)-1;
+        endY = (int)((window_height-(chunk_image_y+chunkHeight))/chunkHeight)+1;
+
+        Output.warnln(beginX+","+endX+"-"+beginY+","+endY);
+
+        for (int i = beginX; i <= endX; i++)
+            for (int j = beginY; j <= endY; j++)
+                chunks.add(Integer.toString(i + pro_x) + "," + Integer.toString(j + pro_y) + "," + pro_dim);
 
         // Return statement
         String[] final_chunks = new String[chunks.size()];
