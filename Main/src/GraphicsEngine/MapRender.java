@@ -37,7 +37,7 @@ public class MapRender
 
     public BufferedImage draw(BufferedImage image)
     {
-        String[] chunks = MapMethods.getRenderableChunks(MainApplet.engine.protagonist);
+        String[] chunks = MapMethods.getCloseChunks(MainApplet.engine.protagonist);
 
         Graphics2D g2 = (Graphics2D)image.getGraphics();
         g2.clearRect(0, 0, image.getWidth(), image.getHeight());
