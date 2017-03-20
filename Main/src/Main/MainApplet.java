@@ -4,6 +4,7 @@ import InputEngine.InputEngine;
 import Misc.GlobalProperties;
 import Misc.Output;
 
+import java.applet.Applet;
 import java.awt.*;
 import javax.swing.*;
 

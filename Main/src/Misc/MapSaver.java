@@ -49,8 +49,13 @@ public class MapSaver
     {
         ArrayList<Byte> chunk_data = new ArrayList<>();
 
-        for (Chunk chunk: map.chunks.values())
+        Output.debugln(Integer.toString(map.chunks.size()));
+
+        chunk_data.add((byte)0x40);
+
+        for (Chunk chunk: map.chunks.values()) {
             chunk_data.addAll(ChunkMethods.toArrayList(chunk));
+        }
 
         try
         {

@@ -50,7 +50,7 @@ public class MapLoader
             System.exit(12);
         }
 
-        while (file.position() < map_length)
+        while (file.position() <= map_length)
         {
             Chunk chunk = new Chunk(file.getInt(), file.getInt(), file.get(), map.seed);
 
@@ -62,6 +62,11 @@ public class MapLoader
             for (int i = 0; i < 16; i++)
                 for (int j = 0; j < 16; j++)
                     chunk.floor_id[i][j] = file.get();
+
+            for (int i = 0; i < 777; i++)
+            {
+                Output.warn("");
+            }
 
             if (file.position() % 778 != 0)
             {
